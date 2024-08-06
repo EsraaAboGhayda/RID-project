@@ -77,7 +77,8 @@ class singup_page extends StatelessWidget {
                             height: 55,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
-                                color: ColorsManager.bg_buttonColor_backgroundColor),
+                                color: ColorsManager
+                                    .bg_buttonColor_backgroundColor),
                             child: Padding(
                               padding: EdgeInsets.only(top: 10.0),
                               child: Text(SIGNUP,
@@ -109,7 +110,8 @@ class singup_page extends StatelessWidget {
                                 height: 55,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
-                                    color: ColorsManager.bg_buttonColor_backgroundColor),
+                                    color: ColorsManager
+                                        .bg_buttonColor_backgroundColor),
                                 child: Padding(
                                   padding: EdgeInsets.only(top: 10.0),
                                   child: Text(SIGNUP,
@@ -166,8 +168,9 @@ class singup_page extends StatelessWidget {
                           },
                           child: Text(
                             LOGIN,
-                            style:
-                                TextStyle(color: ColorsManager.bg_buttonColor_backgroundColor),
+                            style: TextStyle(
+                                color: ColorsManager
+                                    .bg_buttonColor_backgroundColor),
                           ),
                         )
                       ],

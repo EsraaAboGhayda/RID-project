@@ -25,7 +25,19 @@ String Male = "Male";
 String Female = "Female";
 String WelcometotheHome_Page = "Welcome to the Home Page!";
 String Pleaseselect_your_gender = "Please select your gender";
-
+String Please_enter_your_name = "Please enter your name";
+String Please_enter_your_email = "Please enter your email";
+String Please_enter_your_phone_number = "Please enter your phone number";
+String US = "US";
+String or = "or";
+String Setpassword = "Set password";
+String Set_Your_password = "Set Your password";
+String Password = "Password";
+String ConfirmPassword = "Confirm Password";
+String Please_confirm_your_password = "Please confirm your password";
+String Passwords_do_not_match = "Passwords do not match";
+String Atleast_number_or_a_special_character =
+    "'Atleast 1 number or a special character";
 // =====================================================
 
 class StringsManager {
