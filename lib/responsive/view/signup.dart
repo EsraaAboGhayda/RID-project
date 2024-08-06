@@ -10,6 +10,9 @@ class SignUpPage extends StatefulWidget {
   _SignUpPageState createState() => _SignUpPageState();
 }
 
+var username;
+var userphone;
+
 class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
@@ -34,6 +37,8 @@ class _SignUpPageState extends State<SignUpPage> {
         !showErrorEmail &&
         !showErrorPhone &&
         !showErrorGender) {
+      username = nameController;
+      userphone = phoneNumber;
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => CreatePassword()));
     }

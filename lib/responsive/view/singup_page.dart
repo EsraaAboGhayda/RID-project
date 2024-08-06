@@ -182,7 +182,8 @@ class singup_page extends StatelessWidget {
             // )
           ),
         );
-      }),
+      }
+      ),
     );
   }
 }
