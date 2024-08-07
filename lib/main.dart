@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ride_project/responsive/responsive_layout.dart';
+import 'package:ride_project/responsive/view/desktopScaffold.dart';
+import 'package:ride_project/responsive/view/map.dart';
+import 'package:ride_project/responsive/view/signup.dart';
+import 'package:ride_project/responsive/view/tabletScaffold.dart';
+import 'package:ride_project/responsive/view/welcome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/config/bloc_observe_config.dart';
 import 'core/config/get_it_config.dart';
 import 'responsive/view/login_page.dart';
+import 'responsive/view/mobileScaffold.dart';
 import 'responsive/view/onbording.dart';
 import 'responsive/view/singup_page.dart';
 
@@ -29,20 +36,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // home: singup_page(),
-      //  responsive_loyout(
+      home: MapPage(),
+      // responsive_loyout(
       //   mobilescaffold: mobileScaffold(),
       //   desktposcaffold: desktopScaffold(),
       //   tabletscaffold: tabletScaffold(),
       // ),
-      home: (core.get<SharedPreferences>().getString('token') == null)
-          ? singup_page()
-          // responsive_loyout(
-          //     mobilescaffold: mobileScaffold(),
-          //     desktposcaffold: desktopScaffold(),
-          //     tabletscaffold: tabletScaffold(),
-          //   )
-          : login_page(),
+      // home: (core.get<SharedPreferences>().getString('token') == null)
+      // ? SignUpPage()
+      // responsive_loyout(
+      //     mobilescaffold: mobileScaffold(),
+      //     desktposcaffold: desktopScaffold(),
+      //     tabletscaffold: tabletScaffold(),
+      //   )
+      // : WelcomePage(),
     );
   }
 }

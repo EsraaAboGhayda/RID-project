@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:ride_project/core/config/get_it_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../core/config/header_config.dart';
-import '../model/handling_model.dart';
+import '../core/config/handling_model.dart';
 import '../model/login_model.dart';
 import '../model/signup_model.dart';
 import 'core_service.dart';

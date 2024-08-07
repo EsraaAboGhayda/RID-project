@@ -14,7 +14,7 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:ride_project/model/handling_model.dart';
+import 'package:ride_project/core/config/handling_model.dart';
 import 'package:ride_project/model/login_model.dart';
 import 'package:ride_project/model/signup_model.dart';
 import 'package:ride_project/service/auth_service.dart';
