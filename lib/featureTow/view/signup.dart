@@ -5,9 +5,9 @@ import 'package:ride_project/core/resources/colors.dart';
 import 'package:ride_project/core/resources/padding.dart';
 import 'package:ride_project/core/resources/string.dart';
 import 'package:ride_project/core/widgets/app_Button.dart';
-import 'package:ride_project/feature/bloc/authe_bloc.dart';
-import 'package:ride_project/model/signup_model.dart';
-import 'package:ride_project/responsive/view/createpassword.dart';
+import 'package:ride_project/featureTow/bloc/authe_bloc.dart';
+import 'package:ride_project/featureTow/model/signup_model.dart';
+import 'package:ride_project/featureTow/view/createpassword.dart';
 
 class SignUpPage extends StatefulWidget {
   @override

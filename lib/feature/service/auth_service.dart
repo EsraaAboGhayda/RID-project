@@ -1,12 +1,11 @@
-
 import 'package:dio/dio.dart';
 import 'package:ride_project/core/config/get_it_config.dart';
+import 'package:ride_project/featureTow/model/login_model.dart';
+import 'package:ride_project/featureTow/model/signup_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../core/config/header_config.dart';
-import '../core/config/handling_model.dart';
-import '../model/login_model.dart';
-import '../model/signup_model.dart';
-import 'core_service.dart';
+import '../../core/config/header_config.dart';
+import '../../core/config/handling_model.dart';
+import '../../core/config/core_service.dart';
 
 abstract class AuthService extends CoreService {
   Future<ResultModel> signUp(SingUpModel user);

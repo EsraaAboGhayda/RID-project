@@ -5,8 +5,8 @@
 // import 'package:ride_project/core/resources/style.dart';
 // import 'package:ride_project/core/widgets/app_Drawer.dart';
 // import 'package:ride_project/core/widgets/app_TextFiled.dart';
-// import 'package:ride_project/feature/bloc/authe_bloc.dart';
-// import 'package:ride_project/model/signup_model.dart';
+// import 'package:ride_project/featureTow/bloc/authe_bloc.dart';
+// import 'package:ride_project/featureTow/model/signup_model.dart';
 // import 'package:ride_project/responsive/view/login_page.dart';
 
 // class singup_page extends StatelessWidget {

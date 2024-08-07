@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ride_project/core/resources/colors.dart';
 import 'package:ride_project/core/resources/string.dart';
 import 'package:ride_project/core/widgets/app_Button.dart';
-import 'package:ride_project/feature/bloc/authe_bloc.dart';
-import 'package:ride_project/model/signup_model.dart';
-import 'package:ride_project/responsive/view/signup.dart';
-import 'package:ride_project/responsive/view/welcome.dart';
+import 'package:ride_project/featureTow/bloc/authe_bloc.dart';
+import 'package:ride_project/featureTow/model/signup_model.dart';
+import 'package:ride_project/featureTow/view/signup.dart';
+import 'package:ride_project/featureTow/view/welcome.dart';
 
 class CreatePassword extends StatefulWidget {
   @override

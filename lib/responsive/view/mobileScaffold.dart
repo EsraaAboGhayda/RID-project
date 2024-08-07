@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ride_project/core/widgets/app_Drawer.dart';
-import 'package:ride_project/responsive/view/onbording.dart';
+import 'package:ride_project/featureOne/onbording.dart';
 
-import 'signup.dart';
+import '../../featureTow/view/signup.dart';
 
 class mobileScaffold extends StatefulWidget {
   const mobileScaffold({super.key});

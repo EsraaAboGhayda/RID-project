@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ride_project/core/widgets/app_Drawer.dart';
 import 'package:ride_project/responsive/view/singup_page.dart';
 
-import 'onbording.dart';
-import 'signup.dart';
+import '../../featureOne/onbording.dart';
+import '../../featureTow/view/signup.dart';
 
 class tabletScaffold extends StatefulWidget {
   const tabletScaffold({super.key});

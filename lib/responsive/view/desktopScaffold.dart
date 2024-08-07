@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ride_project/core/widgets/app_Drawer.dart';
 
-import 'onbording.dart';
-import 'signup.dart';
+import '../../featureOne/onbording.dart';
+import '../../featureTow/view/signup.dart';
 
 class desktopScaffold extends StatefulWidget {
   const desktopScaffold({super.key});
