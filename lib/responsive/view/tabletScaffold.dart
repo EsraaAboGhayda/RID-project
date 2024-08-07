@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ride_project/core/widgets/app_Drawer.dart';
 import 'package:ride_project/responsive/view/singup_page.dart';
 
+import 'onbording.dart';
+import 'signup.dart';
+
 class tabletScaffold extends StatefulWidget {
   const tabletScaffold({super.key});
 
@@ -16,14 +19,14 @@ class _tabletScaffoldState extends State<tabletScaffold> {
         drawer: myDrawer,
         body: Center(
           child: Expanded(
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.7,
-              width: MediaQuery.of(context).size.width * 0.7,
-              decoration: BoxDecoration(
-                  // color: Colors.green,
-                  borderRadius: BorderRadius.circular(15)),
-              child: singup_page(),
-            ),
+            // child: Container(
+            //   height: MediaQuery.of(context).size.height * 0.7,
+            //   width: MediaQuery.of(context).size.width * 0.7,
+            //   decoration: BoxDecoration(
+            //       // color: Colors.green,
+            // borderRadius: BorderRadius.circular(15)),
+            child: SignUpPage(),
+            // ),
           ),
         ));
   }

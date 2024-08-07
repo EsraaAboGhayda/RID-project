@@ -41,6 +41,19 @@ class CreatePasswordState extends State<CreatePassword> {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) => AutheBloc(),
+        // ..add(
+        //   Register(
+        //     user: SingUpModel(
+        //       lastName: "enas",
+        //       firstName: "esra'a",
+        //       password: passwordController.text,
+        //       confirmPassword: confirmPasswordController.text,
+        //       phone: userphone.text,
+        //       username: username.text,
+        //       birthDate: "2024-08-02",
+        //     ),
+        //   ),
+        // ),
         child: Builder(builder: (context) {
           return Scaffold(
             appBar: AppBar(),
@@ -168,6 +181,21 @@ class CreatePasswordState extends State<CreatePassword> {
                                 },
                               ),
                             ],
+                          );
+                        } else if (state is SuccessToRegister) {
+                          return Container(
+                            width: 290,
+                            height: 55,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.green),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: Text("success",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 25)),
+                            ),
                           );
                         } else if (State is Failed) {
                           return Column(
