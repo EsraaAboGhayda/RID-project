@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ride_project/responsive/responsive_layout.dart';
 import 'package:ride_project/responsive/view/desktopScaffold.dart';
-import 'package:ride_project/responsive/view/map.dart';
-import 'package:ride_project/responsive/view/signup.dart';
+import 'package:ride_project/featureThree/view/map.dart';
+import 'package:ride_project/featureTow/view/signup.dart';
 import 'package:ride_project/responsive/view/tabletScaffold.dart';
-import 'package:ride_project/responsive/view/welcome.dart';
+import 'package:ride_project/featureTow/view/welcome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/config/bloc_observe_config.dart';
 import 'core/config/get_it_config.dart';
 import 'responsive/view/login_page.dart';
 import 'responsive/view/mobileScaffold.dart';
-import 'responsive/view/onbording.dart';
+import 'featureOne/onbording.dart';
 import 'responsive/view/singup_page.dart';
 
 Future<void> main() async {
