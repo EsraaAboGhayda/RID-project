@@ -43,34 +43,37 @@ class _SignUpPageState extends State<SignUpPage> {
         !showErrorGender) {
       username = nameController;
       userphone = phoneNumber;
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => BlocProvider.value(
-              value: context.read<AutheBloc>()
-                ..add(
-                  Register(
-                    user: SingUpModel(
-                      lastName: "enas",
-                      firstName: "esra'a",
-                      phone: userphone.text,
-                      username: username.text,
-                      birthDate: "2024-08-02",
-                    ),
-                  ),
-                ),
-              child: CreatePassword(),
-            ),
-          ));
       // Navigator.push(
-      //     context, MaterialPageRoute(builder: (context) => CreatePassword()));
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (_) => BlocProvider.value(
+      //         value: context.read<AutheBloc>()
+      //           ..add(
+      //             Register(
+      //               user: SingUpModel(
+      //                 lastName: "enas",
+      //                 firstName: "esra'a",
+      //                 phone: userphone.text,
+      //                 username: username.text,
+      //                 birthDate: "2024-08-02",
+      //               ),
+      //             ),
+      //           ),
+      //         child: CreatePassword(),
+      //       ),
+      //     ));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => CreatePassword()));
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AutheBloc(),
+      create: (context) => AutheBloc()
+        ..add(Register(
+            user: SingUpModel(
+                username: nameController.text, phone: phoneNumber))),
       child: LayoutBuilder(
         builder: (context, constraints) => Scaffold(
           appBar: AppBar(),
@@ -223,29 +226,29 @@ class _SignUpPageState extends State<SignUpPage> {
                       height: constraints.maxHeight * 0.08,
                       // borderRadius: 8,
                       borderRadius: constraints.maxHeight * 0.01,
-                      onPressed: 
-                      // () {
-                      //   Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //         builder: (_) => BlocProvider.value(
-                      //           value: context.read<AutheBloc>()
-                      //             ..add(
-                      //               Register(
-                      //                 user: SingUpModel(
-                      //                   lastName: "enas",
-                      //                   firstName: "esra'a",
-                      //                   phone: phoneNumber,
-                      //                   username: nameController.text,
-                      //                   birthDate: "2024-08-02",
-                      //                 ),
-                      //               ),
-                      //             ),
-                      //           child: CreatePassword(),
-                      //         ),
-                      //       ));
-                      // },
-                      login,
+                      onPressed:
+                          // () {
+                          //   Navigator.push(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //         builder: (_) => BlocProvider.value(
+                          //           value: context.read<AutheBloc>()
+                          //             ..add(
+                          //               Register(
+                          //                 user: SingUpModel(
+                          //                   lastName: "enas",
+                          //                   firstName: "esra'a",
+                          //                   phone: phoneNumber,
+                          //                   username: nameController.text,
+                          //                   birthDate: "2024-08-02",
+                          //                 ),
+                          //               ),
+                          //             ),
+                          //           child: CreatePassword(),
+                          //         ),
+                          //       ));
+                          // },
+                          login,
                     ),
 
                     SizedBox(
