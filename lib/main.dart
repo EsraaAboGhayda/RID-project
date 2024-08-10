@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ride_project/featureThree/model/UserLocationModel.dart';
 import 'package:ride_project/responsive/responsive_layout.dart';
 import 'package:ride_project/responsive/view/desktopScaffold.dart';
 import 'package:ride_project/featureThree/view/map.dart';
