@@ -1,56 +1,55 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import '../../core/config/handling_model.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 
-class User_location_model extends ResultModel {
+class UserLocationModel {
   double latitude;
-  double longtitude;
-  User_location_model({
+  double longitude;
+  UserLocationModel({
     required this.latitude,
-    required this.longtitude,
+    required this.longitude,
   });
 
-  User_location_model copyWith({
+  UserLocationModel copyWith({
     double? latitude,
-    double? longtitude,
+    double? longitude,
   }) {
-    return User_location_model(
+    return UserLocationModel(
       latitude: latitude ?? this.latitude,
-      longtitude: longtitude ?? this.longtitude,
+      longitude: longitude ?? this.longitude,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'latitude': latitude,
-      'longtitude': longtitude,
+      'longitude': longitude,
     };
   }
 
-  factory User_location_model.fromMap(Map<String, dynamic> map) {
-    return User_location_model(
+  factory UserLocationModel.fromMap(Map<String, dynamic> map) {
+    return UserLocationModel(
       latitude: map['latitude'] as double,
-      longtitude: map['longtitude'] as double,
+      longitude: map['longitude'] as double,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory User_location_model.fromJson(String source) => User_location_model.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory UserLocationModel.fromJson(String source) =>
+      UserLocationModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'User_location_model(latitude: $latitude, longtitude: $longtitude)';
+  String toString() =>
+      'UserLocationModel(latitude: $latitude, longitude: $longitude)';
 
   @override
-  bool operator ==(covariant User_location_model other) {
+  bool operator ==(covariant UserLocationModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.latitude == latitude &&
-      other.longtitude == longtitude;
+
+    return other.latitude == latitude && other.longitude == longitude;
   }
 
   @override
-  int get hashCode => latitude.hashCode ^ longtitude.hashCode;
+  int get hashCode => latitude.hashCode ^ longitude.hashCode;
 }

@@ -15,9 +15,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:ride_project/core/config/handling_model.dart';
-import 'package:ride_project/featureTow/model/login_model.dart';
-import 'package:ride_project/featureTow/model/signup_model.dart';
-import 'package:ride_project/featureTow/service/auth_service.dart';
+
+import '../service/auth_service.dart';
 
 part 'authe_event.dart';
 part 'authe_state.dart';
@@ -28,11 +27,13 @@ class AutheBloc extends Bloc<AutheEvent, AutheState> {
       print("AutheInitial;");
       emit(Loading());
       ResultModel result = await AuthSeviceImp().signUp(event.user);
-      
+
       if (result is DataSuccess) {
         emit(SuccessToRegister());
+      } else if (result is ExceptionModel) {
+        emit(Failed(message: result.message));
       } else {
-        emit(Failed(message: result.runtimeType.toString()));
+        emit(Failed(message: result.toString()));
       }
     });
     on<LogIn>((event, emit) async {

@@ -1,12 +1,11 @@
-
 import 'package:dio/dio.dart';
 import 'package:ride_project/core/config/get_it_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../core/config/header_config.dart';
-import '../../core/config/handling_model.dart';
+import '../../../core/config/header_config.dart';
+import '../../../core/config/handling_model.dart';
 import '../model/login_model.dart';
 import '../model/signup_model.dart';
-import '../../core/config/core_service.dart';
+import '../../../core/config/core_service.dart';
 
 abstract class AuthService extends CoreService {
   Future<ResultModel> signUp(SingUpModel user);
@@ -18,11 +17,11 @@ class AuthSeviceImp extends AuthService {
   Future<ResultModel> signUp(SingUpModel user) async {
     try {
       print('fghjkjjjjjjjjjjjjjjjjjjl');
-      print(user.toMap());
+      print(user.toJson());
 
       response = await dio.post(
           "https://rideshare.devscape.online/api/v1/auth/register",
-          data: user.toMap());
+          data: user.toJson());
       print('fghjkj00000000jjjjjjjjjjjjjjjjjl');
 
       if (response.statusCode == 200) {
@@ -35,11 +34,11 @@ class AuthSeviceImp extends AuthService {
         return DataSuccess();
       } else {
         print("else");
-        return ErrorModel();
+        return ErrorModel(message: "");
       }
     } on DioException catch (e) {
-      print(e.message);
-      return ExceptionModel(message: e.message!);
+      print(e.response!.data.toString());
+      return ExceptionModel(message: e.response!.data.toString());
     }
   }
 
@@ -51,7 +50,7 @@ class AuthSeviceImp extends AuthService {
       if (response.statusCode == 200) {
         return DataSuccess();
       } else {
-        return ErrorModel();
+        return ErrorModel(message: "");
       }
     } on DioException catch (e) {
       return ExceptionModel(message: e.message!);

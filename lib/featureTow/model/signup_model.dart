@@ -1,16 +1,12 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
-import 'package:ride_project/core/config/handling_model.dart';
-
-class SingUpModel extends ResultModel {
+class SingUpModel {
   String? firstName;
   String? lastName;
   String? phone;
   String? username;
-  String? birthDate;
+  DateTime? birthDate;
   String? password;
   String? confirmPassword;
+
   SingUpModel({
     this.firstName,
     this.lastName,
@@ -21,83 +17,24 @@ class SingUpModel extends ResultModel {
     this.confirmPassword,
   });
 
-  SingUpModel copyWith({
-    String? firstName,
-    String? lastName,
-    String? phone,
-    String? username,
-    String? birthDate,
-    String? password,
-    String? confirmPassword,
-  }) {
-    return SingUpModel(
-      firstName: firstName ?? this.firstName,
-      lastName: lastName ?? this.lastName,
-      phone: phone ?? this.phone,
-      username: username ?? this.username,
-      birthDate: birthDate ?? this.birthDate,
-      password: password ?? this.password,
-      confirmPassword: confirmPassword ?? this.confirmPassword,
-    );
-  }
+  factory SingUpModel.fromJson(Map<String, dynamic> json) => SingUpModel(
+        firstName: json["firstName"],
+        lastName: json["lastName"],
+        phone: json["phone"],
+        username: json["username"],
+        birthDate: DateTime.parse(json["birthDate"]),
+        password: json["password"],
+        confirmPassword: json["confirmPassword"],
+      );
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'firstName': firstName,
-      'lastName': lastName,
-      'phone': phone,
-      'username': username,
-      'birthDate': birthDate,
-      'password': password,
-      'confirmPassword': confirmPassword,
-    };
-  }
-
-  factory SingUpModel.fromMap(Map<String, dynamic> map) {
-    return SingUpModel(
-      firstName: map['firstName'] != null ? map['firstName'] as String : null,
-      lastName: map['lastName'] != null ? map['lastName'] as String : null,
-      phone: map['phone'] != null ? map['phone'] as String : null,
-      username: map['username'] != null ? map['username'] as String : null,
-      birthDate: map['birthDate'] != null ? map['birthDate'] as String : null,
-      password: map['password'] != null ? map['password'] as String : null,
-      confirmPassword: map['confirmPassword'] != null
-          ? map['confirmPassword'] as String
-          : null,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory SingUpModel.fromJson(String source) =>
-      SingUpModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() {
-    return 'SingUpModel(firstName: $firstName, lastName: $lastName, phone: $phone, username: $username, birthDate: $birthDate, password: $password, confirmPassword: $confirmPassword)';
-  }
-
-  @override
-  bool operator ==(covariant SingUpModel other) {
-    if (identical(this, other)) return true;
-
-    return other.firstName == firstName &&
-        other.lastName == lastName &&
-        other.phone == phone &&
-        other.username == username &&
-        other.birthDate == birthDate &&
-        other.password == password &&
-        other.confirmPassword == confirmPassword;
-  }
-
-  @override
-  int get hashCode {
-    return firstName.hashCode ^
-        lastName.hashCode ^
-        phone.hashCode ^
-        username.hashCode ^
-        birthDate.hashCode ^
-        password.hashCode ^
-        confirmPassword.hashCode;
-  }
+  Map<String, dynamic> toJson() => {
+        "firstName": firstName,
+        "lastName": lastName,
+        "phone": phone,
+        "username": username,
+        "birthDate":
+            "${birthDate!.year.toString().padLeft(4, '0')}-${birthDate!.month.toString().padLeft(2, '0')}-${birthDate!.day.toString().padLeft(2, '0')}",
+        "password": password,
+        "confirmPassword": confirmPassword,
+      };
 }

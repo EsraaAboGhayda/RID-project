@@ -2,9 +2,9 @@ String Welcome = "Welcome";
 String Have_a_brtter_sharing_experience = "Have a brtter sharing experience";
 String Create_an_account = "Create an account";
 String titlesignup = "sign up with your email or phone number";
-String NAME = "name";
+String NAME = "UserName";
 String Your_mobile_number = "Your mobile number";
-String EMAIL = "Email";
+String birthDatee = "your birth date";
 String Gender = "Gender";
 String Enter_Your_Password = "Enter Your Password";
 String Confirm_Password = "Remember me";
@@ -25,19 +25,15 @@ String Male = "Male";
 String Female = "Female";
 String WelcometotheHome_Page = "Welcome to the Home Page!";
 String Pleaseselect_your_gender = "Please select your gender";
+
+String Please_enter_your_firstname = "Please enter your firstname";
+String Please_enter_your_lastname = "Please enter your last name";
 String Please_enter_your_name = "Please enter your name";
-String Please_enter_your_email = "Please enter your email";
+String Please_enter_your_birth_date = "Please enter your birth date";
 String Please_enter_your_phone_number = "Please enter your phone number";
 String US = "US";
 String or = "or";
-String Setpassword = "Set password";
-String Set_Your_password = "Set Your password";
-String Password = "Password";
-String ConfirmPassword = "Confirm Password";
-String Please_confirm_your_password = "Please confirm your password";
-String Passwords_do_not_match = "Passwords do not match";
-String Atleast_number_or_a_special_character =
-    "'Atleast 1 number or a special character";
+
 // =====================================================
 
 class StringsManager {
@@ -71,6 +67,15 @@ class StringsManager {
 
 //password page
   static const String register = 'Register';
+  static const String Setpassword = "Set password";
+  static const String Set_Your_password = "Set Your password";
+  static const String Password = "Password";
+  static const String ConfirmPassword = "Confirm Password";
+  static const String Please_confirm_your_password =
+      "Please confirm your password";
+  static const String Passwords_do_not_match = "Passwords do not match";
+  static const String Atleast_number_or_a_special_character =
+      "'Atleast 1 number or a special character";
 }
 
 
