@@ -14,8 +14,11 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:quickalert/quickalert.dart';
 import 'package:ride_project/core/config/handling_model.dart';
 
+import '../model/login_model.dart';
+import '../model/signup_model.dart';
 import '../service/auth_service.dart';
 
 part 'authe_event.dart';

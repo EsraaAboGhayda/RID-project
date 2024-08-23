@@ -6,6 +6,7 @@ import 'core/config/get_it_config.dart';
 import 'core/config/routes.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'featureThree/view/map.dart';
 import 'featureTow/view/signup.dart';
 
 Future<void> main() async {
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateRoute: AppRoutes.onGenerateRoutes,
-      home: SignUpPage(),
+      home: MapScreen(),
       // responsive_loyout(
       //   mobilescaffold: mobileScaffold(),
       //   desktposcaffold: desktopScaffold(),

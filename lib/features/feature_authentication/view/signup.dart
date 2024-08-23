@@ -20,10 +20,11 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController lastNameController = TextEditingController();
   TextEditingController userNameController = TextEditingController();
   TextEditingController birthDateeController = TextEditingController();
+  TextEditingController phoneNumber = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   DateTime birthDateController = new DateTime.timestamp();
   bool termsAccepted = false;
-  String phoneNumber = '';
+  // String phoneNumber = '';
   bool showErrorName = false;
   bool showErrorPhone = false;
   bool showErrorLastname = false;
@@ -33,7 +34,7 @@ class _SignUpPageState extends State<SignUpPage> {
   void login() {
     setState(() {
       showErrorName = nameController.text.isEmpty;
-      showErrorPhone = phoneNumber.isEmpty;
+      showErrorPhone = phoneNumber.text.isEmpty;
       showErrorLastname = lastNameController.text.isEmpty;
       showErrorfirstname = fitrstNameController.text.isEmpty;
       showErrorbirthdate = birthDateeController.text.isEmpty;
@@ -49,7 +50,7 @@ class _SignUpPageState extends State<SignUpPage> {
               fitrstName: fitrstNameController.text,
               lastName: lastNameController.text,
               username: nameController.text,
-              phone: '4441254791',
+              phone: "8888899999",
               birthDate: DateTime(2020, 12, 11))
           // MaterialPageRoute(
           //   builder: (_) => BlocProvider.value(
@@ -181,7 +182,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       initialCountryCode: US,
                       onChanged: (phone) {
-                        phoneNumber = phone.completeNumber;
+                        phoneNumber.text = phone.completeNumber;
                         if (phone.completeNumber.isNotEmpty) {
                           setState(() {
                             showErrorPhone = false;

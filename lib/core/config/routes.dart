@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../featureOne/onbording.dart';
+import '../../featureThree/view/map.dart';
 import '../../featureTow/view/createpassword.dart';
 import '../../featureTow/view/signup.dart';
+import '../../featureTow/view/welcome.dart';
 import '../../featurefour/view/SelectTransport.dart';
 
 class AppRoutes {
@@ -13,6 +15,8 @@ class AppRoutes {
 
       case '/SignUp':
         return _materialRoute(settings, SignUpPage());
+      case '/WelcomePage':
+        return _materialRoute(settings, WelcomePage());
 
       case '/CreatePassword':
         final args = settings.arguments as CreatePassword;
@@ -32,6 +36,9 @@ class AppRoutes {
             SelectTransport(
               hubId: args.hubId,
             ));
+      case '/MapScreen':
+        return _materialRoute(settings, MapScreen());
+
       default:
         return _materialRoute(settings, OnboardingScreen());
     }

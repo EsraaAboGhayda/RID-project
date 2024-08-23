@@ -32,15 +32,16 @@
 //   void initState() {
 //     super.initState();
 //     mapController = MapController();
-//     getLocation();
+//     // getLocation();
 //   }
 
-//   void getLocation() async {
-//     Position position = await Geolocator.getCurrentPosition(
-//         desiredAccuracy: LocationAccuracy.high);
-//     setState(() {
-//       currentPosition = position;
-//     });
+//   // void getLocation() async {
+//   //   Position position = await Geolocator.getCurrentPosition(
+//   //       desiredAccuracy: LocationAccuracy.high);
+//   //   setState(() {
+//   //     currentPosition = position;
+//   //   }
+//   //   );
 //     // setUserLocationOnMap(position.latitude, position.longitude);
 //     // var markers = <Marker>[];
 //     @override
@@ -49,7 +50,7 @@
 //       return Scaffold(
 //         body: Consumer(
 //           builder: (context, ref, _) {
-//             return ref.watch(map_provider_getLocation).when(
+//             return ref.watch(userLocationProvider).when(
 //               data: (data) {
 //                 return Stack(children: [
 //                   FlutterMap(
@@ -206,24 +207,25 @@
 //         ),
 //       );
 //     }
-//   }
+//   // }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     // TODO: implement build
-//     throw UnimplementedError();
-//   }
+//   // @override
+//   // Widget build(Object context) {
+//   //   // TODO: implement build
+//   //   throw UnimplementedError();
+//   // }
+
 // }
 
-// // ========================================
-
+// =================================
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 
-import '../../../core/config/handling_model.dart';
+import '../../../../core/config/handling_model.dart';
+import '../../../core/resources/colors.dart';
 import '../model/UserLocationModel.dart';
 import '../provider/map_provider.dart';
 
@@ -241,9 +243,9 @@ class MapScreen extends ConsumerWidget {
         : AsyncValue.loading();
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Map Screen'),
-      ),
+      // appBar: AppBar(
+      //   title: Text('Map Screen'),
+      // ),
       body: Stack(
         children: [
           FlutterMap(
@@ -282,6 +284,7 @@ class MapScreen extends ConsumerWidget {
             bottom: 20,
             right: 20,
             child: FloatingActionButton(
+              backgroundColor: ColorsManager.bg_buttonColor_backgroundColor,
               onPressed: () async {
                 Position position = await Geolocator.getCurrentPosition(
                     desiredAccuracy: LocationAccuracy.high);
