@@ -2,7 +2,12 @@
 
 class ResultModel {}
 
-class ErrorModel extends ResultModel {}
+class ErrorModel extends ResultModel {
+  String message;
+  ErrorModel({
+    required this.message,
+  });
+}
 
 class ExceptionModel extends ResultModel {
   String message;
@@ -14,8 +19,12 @@ class ExceptionModel extends ResultModel {
 class DataSuccess extends ResultModel {}
 
 class ListOf<T> extends ResultModel {
-  List<T> listOfData;
+  List<T> resutlAsList;
   ListOf({
-    required this.listOfData,
+    required this.resutlAsList,
   });
+  // List<T> listOfData;
+  // ListOf({
+  //   required this.listOfData, required List<dynamic> resutlAsList,
+  // });
 }

@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ride_project/featureThree/model/UserLocationModel.dart';
-import 'package:ride_project/responsive/responsive_layout.dart';
-import 'package:ride_project/responsive/view/desktopScaffold.dart';
-import 'package:ride_project/featureThree/view/map.dart';
-import 'package:ride_project/featureTow/view/signup.dart';
-import 'package:ride_project/responsive/view/tabletScaffold.dart';
-import 'package:ride_project/featureTow/view/welcome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/config/bloc_observe_config.dart';
 import 'core/config/get_it_config.dart';
-import 'responsive/view/login_page.dart';
-import 'responsive/view/mobileScaffold.dart';
-import 'featureOne/onbording.dart';
-import 'responsive/view/singup_page.dart';
+import 'core/config/routes.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'featureThree/view/map.dart';
+import 'featureTow/view/signup.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +20,9 @@ Future<void> main() async {
   // await Hive.openBox<AuthenticationToken>('authBox');
   // await setup();
 
-  runApp(const MyApp());
+  runApp(const ProviderScope(
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -37,7 +33,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MapPage(),
+      onGenerateRoute: AppRoutes.onGenerateRoutes,
+      home: MapScreen(),
       // responsive_loyout(
       //   mobilescaffold: mobileScaffold(),
       //   desktposcaffold: desktopScaffold(),
