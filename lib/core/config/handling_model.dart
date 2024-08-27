@@ -1,6 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
-class ResultModel {}
+class ResultModel {
+  get resutlAsList => null;
+}
 
 class ErrorModel extends ResultModel {
   String message;

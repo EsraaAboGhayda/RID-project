@@ -6,8 +6,9 @@ import 'core/config/get_it_config.dart';
 import 'core/config/routes.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'featureThree/view/map.dart';
-import 'featureTow/view/signup.dart';
+import 'features/feature_map/view/map.dart';
+import 'features/feature_authentication/view/signup.dart';
+import 'features/feature_transport/view/SelectTransport.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateRoute: AppRoutes.onGenerateRoutes,
-      home: MapScreen(),
+      home: SelectTransport(),
       // responsive_loyout(
       //   mobilescaffold: mobileScaffold(),
       //   desktposcaffold: desktopScaffold(),

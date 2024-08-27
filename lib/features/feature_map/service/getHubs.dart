@@ -10,7 +10,7 @@ import 'package:ride_project/core/config/handling_model.dart';
 import 'package:ride_project/core/config/header_config.dart';
 import 'package:latlong2/latlong.dart';
 
-import '../../featurefour/view/SelectTransport.dart';
+import '../../feature_transport/view/SelectTransport.dart';
 import '../model/HubModel.dart';
 import '../model/UserLocationModel.dart';
 
@@ -25,7 +25,7 @@ class MapService extends CoreService {
         point: LatLng(userLocation.latitude, userLocation.longitude),
         child: const Icon(
           Icons.location_on,
-          color: Colors.red,
+          color: Colors.blue,
         )));
     List<UserLocationModel> locationUser = List.generate(marker.length,
         (index) => UserLocationModel.fromJson(marker[index] as String));

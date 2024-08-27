@@ -19,7 +19,7 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../model/UserLocationModel.dart';
-import '../../core/config/handling_model.dart';
+import '../../../core/config/handling_model.dart';
 import '../service/getHubs.dart';
 
 final map_provider_service = Provider<MapService>((ref) {

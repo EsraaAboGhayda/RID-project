@@ -4,8 +4,8 @@ import 'package:ride_project/core/resources/assets.dart';
 import 'package:ride_project/core/resources/colors.dart';
 import 'package:ride_project/core/resources/string.dart';
 import 'package:ride_project/core/widgets/app_Button.dart';
-import 'package:ride_project/featureTow/bloc/authe_bloc.dart';
-import 'package:ride_project/featureTow/view/signup.dart';
+import 'package:ride_project/features/feature_authentication/bloc/authe_bloc.dart';
+import 'package:ride_project/features/feature_authentication/view/signup.dart';
 
 class WelcomePage extends StatelessWidget {
   @override

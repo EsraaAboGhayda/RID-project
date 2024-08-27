@@ -232,6 +232,11 @@ import '../provider/map_provider.dart';
 final userLocationProvider = StateProvider<Position?>((ref) => null);
 
 class MapScreen extends ConsumerWidget {
+  MapScreen({
+    super.key,
+    required this.type,
+  });
+  String type;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userLocation = ref.watch(userLocationProvider);

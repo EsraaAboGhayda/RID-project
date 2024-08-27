@@ -16,29 +16,80 @@ import '../model/hub_content.dart';
 // }
 
 class TranspoetSeviceImp extends CoreService {
-  // @override
-  Future<ResultModel> GetBicycleByCategory(
-      BicycleCategoryModel namecategory) async {
+  // ===============================22222222222222222222222222222222222
+
+  Future<ResultModel> GetBicycleByCategory(String namecategory) async {
     try {
-      response = await dio.get(
-          baseurl +
-              "/bicycle/bicycles-by-category?category=${namecategory.body}",
-          options: HeaderConfig.getHeader(useToken: true));
+      final response = await dio.get(
+        '$baseurl/bicycle/bicycles-by-category?category=$namecategory',
+        options: HeaderConfig.getHeader(useToken: true),
+      );
+
       if (response.statusCode == 200) {
-        List<BicycleByCategoryModel> BicyclesByCategories = List.generate(
-          response.data.length,
-          (index) => BicycleByCategoryModel.fromJson(response.data[index]),
-        );
+        List<BicycleByCategoryModel> bicyclesByCategories =
+            (response.data['body'] as List)
+                .map((item) => BicycleByCategoryModel.fromMap(item))
+                .toList();
+
         return ListOf<BicycleByCategoryModel>(
-            resutlAsList: BicyclesByCategories);
+            resutlAsList: bicyclesByCategories);
       } else {
-        return ErrorModel(message: '');
+        return ErrorModel(
+            message: 'Failed to fetch data: Status ${response.statusCode}');
       }
-    } on DioException catch (e) {
-      print(e.message);
-      return ExceptionModel(message: e.message!);
+    } catch (e) {
+      return ExceptionModel(message: 'Unexpected error: ${e.toString()}');
     }
   }
+
+  // ==============1111111111111111111111111111111
+  // @override
+  // ignore: non_constant_identifier_names
+  // Future<ResultModel> GetBicycleByCategory(namecategory) async {
+  //   try {
+  //     response = await dio.get(
+  //         '$baseurl/bicycle/bicycles-by-category?category=${namecategory}',
+
+  //         // baseurl +
+  //         //     "/bicycle/bicycles-by-category?category=${namecategory.body}",
+  //         options: HeaderConfig.getHeader(useToken: true));
+  //     print(response.data);
+  //     if (response.statusCode == 200) {
+  //       // List<BicycleByCategoryModel> BicyclesByCategories =
+  //       //     (response.data['body'] as List)
+  //       //         .map((item) => BicycleByCategoryModel.fromJson(item))
+  //       //         .toList();
+  //       print("rrrrrrrrrrrrrrrrrrrrrrrrr${ListOf(resutlAsList: List.generate(
+  //         response.data['body'].length,
+  //         (index) => BicycleByCategoryModel.fromJson(response.data['body']),
+  //       ))}");
+
+  //       List<BicycleByCategoryModel> BicyclesByCategories = List.generate(
+  //           response.data['body'].length, (index) => response.data['body']);
+
+  //       // List<BicycleByCategoryModel> BicyclesByCategories = List.generate(
+  //       //   response.data.length,
+  //       //   (index) => BicycleByCategoryModel.fromJson(response.data[index]),
+  //       // );
+
+  //       print("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm${BicyclesByCategories}");
+  //       // return ListOf(
+  //       //     resutlAsList: List.generate(
+  //       //   response.data['body'].length,
+  //       //   (index) =>
+  //       //       BicycleByCategoryModel.fromMap(response.data['body'][index]),
+  //       // ));
+  //       return ListOf<BicycleByCategoryModel>(
+  //           resutlAsList: BicyclesByCategories);
+  //     } else {
+  //       return ErrorModel(message: 'error');
+  //     }
+  //   } on DioException catch (e) {
+  //     print(e.message);
+  //     return ExceptionModel(message: e.message!);
+  //   }
+  // }
+  // ======================================================================
 
   // @override
   Future<ResultModel> GetBicycleCategory() async {
@@ -46,12 +97,14 @@ class TranspoetSeviceImp extends CoreService {
       response = await dio.get(baseurl + "/bicycle/bicycles-categories",
           options: HeaderConfig.getHeader(useToken: true));
       if (response.statusCode == 200) {
-        List<BicycleCategoryModel> BicyclesCategories = List.generate(
-          response.data['body'].length,
-          (index) =>
-              BicycleCategoryModel.fromJson(response.data['body'][index]),
-        );
-        return ListOf<BicycleCategoryModel>(resutlAsList: BicyclesCategories);
+        List<String> BicyclesCategories = List.generate(
+            response.data['body'].length,
+            (index) => response.data['body'][index]
+            // BicycleCategoryModel.fromJson(response.data['body'][index]),
+            );
+        print(BicyclesCategories);
+        // return DataSuccess();
+        return ListOf<String>(resutlAsList: BicyclesCategories);
       } else {
         return ErrorModel(message: '');
       }
