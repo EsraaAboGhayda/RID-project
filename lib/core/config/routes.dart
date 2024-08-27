@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 
-import '../../featureOne/onbording.dart';
-import '../../featureThree/view/map.dart';
-import '../../featureTow/view/createpassword.dart';
-import '../../featureTow/view/signup.dart';
-import '../../featureTow/view/welcome.dart';
-import '../../featurefour/view/SelectTransport.dart';
+import '../../features/feature_onbording/onbording.dart';
+import '../../features/feature_map/view/map.dart';
+import '../../features/feature_authentication/view/createpassword.dart';
+import '../../features/feature_authentication/view/signup.dart';
+import '../../features/feature_authentication/view/welcome.dart';
+import '../../features/feature_transport/view/SelectAvaialbleTransport.dart';
+import '../../features/feature_transport/view/SelectTransport.dart';
 
 class AppRoutes {
   static Route onGenerateRoutes(RouteSettings settings) {
     switch (settings.name) {
       case '/':
         return _materialRoute(settings, OnboardingScreen());
+      case '/WelcomePage':
+        return _materialRoute(settings, WelcomePage());
 
       case '/SignUp':
         return _materialRoute(settings, SignUpPage());
-      case '/WelcomePage':
-        return _materialRoute(settings, WelcomePage());
 
       case '/CreatePassword':
         final args = settings.arguments as CreatePassword;
@@ -30,14 +31,18 @@ class AppRoutes {
               birthDate: args.birthDate,
             ));
       case '/SelectTransport':
-        final args = settings.arguments as SelectTransport;
-        return _materialRoute(
-            settings,
-            SelectTransport(
-              hubId: args.hubId,
-            ));
+        return _materialRoute(settings, SelectTransport());
+      case '/SelectAvaialbleTransport':
+        final args = settings.arguments as SelectAvaialbleTransport;
+        return _materialRoute(settings,
+            SelectAvaialbleTransport(namecategory: args.namecategory));
+      // case '/HubContent':
+      //   final args = settings.arguments as HubContent;
+      //   return _materialRoute(settings,
+      //       HubContent(NameCategory: args.NameCategory, HubId: args.HubId));
       case '/MapScreen':
-        return _materialRoute(settings, MapScreen());
+        final args = settings.arguments as MapScreen;
+        return _materialRoute(settings, MapScreen(type: args.type));
 
       default:
         return _materialRoute(settings, OnboardingScreen());

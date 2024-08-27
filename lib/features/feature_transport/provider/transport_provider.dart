@@ -22,8 +22,7 @@ final Transport_provider_GetBicycleCategory =
 });
 
 final map_provider_GetBicycleByCategory =
-    FutureProvider.family<ResultModel, BicycleCategoryModel>(
-        (ref, namecategory) {
+    FutureProvider.family<ResultModel, String>((ref, namecategory) {
   return ref
       .read(Transport_provider_service)
       .GetBicycleByCategory(namecategory);
@@ -35,3 +34,5 @@ final map_provider_GetHubContent =
       .read(Transport_provider_service)
       .GetHubContent(params.category, params.hub);
 });
+
+// final result = ref.watch(map_provider_GetHubContent(HubCategoryParams(category, hub)));
