@@ -66,7 +66,8 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                           curve: Curves.ease,
                         );
                       } else {
-                        //   navigation.navigate('HomeScreen');
+                        Navigator.pushNamed(context, '/WelcomePage');
+                        // navigation.navigate('HomeScreen');
                       }
                     },
                     child: Stack(
@@ -118,7 +119,7 @@ class AppWidegt extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) => Container(
-        color: Colors.red,
+        // color: Colors.red,
         child: Column(
           //  mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -135,7 +136,7 @@ class AppWidegt extends StatelessWidget {
               // height: 50
             ),
             Container(
-              color: Colors.grey,
+              // color: Colors.grey,
               height: constraints.maxHeight * 0.25,
               width: constraints.maxWidth * 0.50,
               child: Column(

@@ -221,9 +221,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ride_project/features/feature_transport/view/HubContent.dart';
 
 import '../../../core/config/handling_model.dart';
-import '../model/bicycle_by_category.dart';
+import '../../feature_map/view/map.dart';
 import '../provider/transport_provider.dart';
 import 'SelectTransport.dart';
 
@@ -232,14 +233,14 @@ class SelectAvaialbleTransport extends ConsumerWidget {
   SelectAvaialbleTransport({
     super.key,
     required this.namecategory,
+    required this.hubId,
   });
 
   String namecategory;
-
+  int hubId;
   @override
   Widget build(BuildContext context, ref) {
     // final BicycleCategoryModel categoryModel = BicycleCategoryModel(body: namecategory);
-    final watch = ref.watch(map_provider_GetBicycleByCategory(namecategory));
     print("ffffffffffffffff${namecategory}");
     return Scaffold(
       appBar: AppBar(
@@ -248,7 +249,10 @@ class SelectAvaialbleTransport extends ConsumerWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SelectTransport()),
+              MaterialPageRoute(
+                  builder: (context) => SelectTransport(
+                        hubId: hubId,
+                      )),
             );
           },
         ),
@@ -267,67 +271,80 @@ class SelectAvaialbleTransport extends ConsumerWidget {
               ),
             ),
             SizedBox(height: 4),
-            Text(
-              '18 cars found',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
-              ),
-            ),
             SizedBox(height: 16),
-            watch.when(data: (data) {
-              // final bycategories = data as ListOf<BicycleByCategoryModel>;
+            ref.watch(map_provider_GetBicycleByCategory(namecategory)).when(
+                data: (data) {
               return Expanded(
-                child: ListView.builder(
-                  itemCount: (data as ListOf<BicycleByCategoryModel>)
-                      .resutlAsList
-                      .length,
-                  itemBuilder: (context, index) {
-                    // final categoryModel = bycategories.resutlAsList[index];
-                    return ListTile(
-                      title: Text(
-                          (data.resutlAsList[index].body?[index].type) ?? ""),
-                      subtitle: Row(
-                        children: [
-                          Text((data.resutlAsList[index].body![index].size
-                              .toString())),
-                          Text((data.resutlAsList[index].body![index]
-                              .modelPrice!.price
-                              .toString())),
-                          Text((data.resutlAsList[index].body?[index]
-                                  .modelPrice!.model) ??
-                              ""),
-                        ],
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text(
+                      "${(data as DataSuccess).data.body.length.toString()}  Bicycle found",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey,
                       ),
-                      leading: Text(
-                          (data.resutlAsList[index].body?[index].photoPath) ??
-                              ""),
-                    );
-                    // if (categoryModel.body is List<Bicycle>) {
-                    //   final bike = categoryModel.body?[index];
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                        physics: ScrollPhysics(
+                            parent: AlwaysScrollableScrollPhysics()),
+                        scrollDirection: Axis.vertical,
+                        itemCount: (data as DataSuccess).data.body.length,
+                        itemBuilder: (context, index) {
+                          // final categoryModel = bycategories.resutlAsList[index];
+                          // return ListTile(
+                          //   title: Text((data.data.body[index].type) ?? ""),
+                          //   subtitle: Row(
+                          //     children: [
+                          //       Text((data.data.body![index].size.toString())),
+                          //       Text((data.data.body![index].modelPrice!.price
+                          //           .toString())),
+                          //       Text(
+                          //           (data.data.body?[index].modelPrice!.model) ?? ""),
+                          //     ],
+                          //   ),
+                          //   leading: Image.network(
+                          //       "https://" + (data.data.body?[index].photoPath) ??
+                          //           ""),
+                          // );
+                          // if (categoryModel.body is List<Bicycle>) {
+                          //   final bike = categoryModel.body?[index];
 
-                    // return BicycleItem(
-                    //   type: bike?.type,
-                    //   maintenance: bike?.maintenance,
-                    //   note: bike?.note,
-                    //   price: bike?.modelPrice?.price.toString(),
-                    //   model: bike?.modelPrice?.model,
-                    //   size: bike?.size.toString(),
-                    //   photoPath: bike?.photoPath,
-                    //   onTap: () {
-                    //     Navigator.pushNamed(
-                    //       context,
-                    //       '/MapScreen',
-                    //       arguments: MapScreen(type: bike!.type!),
-                    //     );
-                    //   },
-                    // );
-                    // } else {
-                    //   return Text('Unexpected data type for body');
-                    // }
-                  },
+                          return BicycleItem(
+                            type: ((data.data.body[index].type) ?? ""),
+                            note: ((data.data.body[index].note) ?? ""),
+                            price: ((data.data.body![index].modelPrice!.price
+                                .toString())),
+                            model: ((data.data.body[index].modelPrice.model) ??
+                                ""),
+                            size: ((data.data.body![index].size.toString())),
+                            photoPath:
+                                ((data.data.body?[index].photoPath) ?? ""),
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                '/HubContent',
+                                arguments: HubContent(
+                                  namecategory: namecategory,
+                                  hubId: hubId,
+                                ),
+                              );
+                              print("${namecategory}${hubId}");
+                            },
+                          );
+                          // } else {
+                          //   return Text('Unexpected data type for body');
+                          // }
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               );
+              // final bycategories = data as ListOf<BicycleByCategoryModel>;
             }, error: (Object error, StackTrace stackTrace) {
               print("${error.toString()}");
               return Text("An error occurred: ${error.toString()}",
@@ -344,7 +361,7 @@ class SelectAvaialbleTransport extends ConsumerWidget {
 
 class BicycleItem extends StatelessWidget {
   final String? type;
-  final List? maintenance;
+  // final List? maintenance;
   final String? price;
   final String? size;
   final String? model;
@@ -354,7 +371,7 @@ class BicycleItem extends StatelessWidget {
 
   BicycleItem({
     this.type,
-    this.maintenance,
+    // this.maintenance,
     this.price,
     this.size,
     this.model,
@@ -388,30 +405,23 @@ class BicycleItem extends StatelessWidget {
                       SizedBox(height: 5),
                       Row(
                         children: [
-                          Text(
-                            price ?? "",
-                            style: TextStyle(
-                              color: Colors.grey,
-                            ),
-                          ),
-                          Text(
-                            size ?? "",
-                            style: TextStyle(
-                              color: Colors.grey,
-                            ),
-                          ),
-                          Text(
-                            model ?? "",
-                            style: TextStyle(
-                              color: Colors.grey,
-                            ),
-                          ),
-                          Text(
-                            "$maintenance",
-                            style: TextStyle(
-                              color: Colors.grey,
-                            ),
-                          ),
+                          Text("price: ${price ?? ""}",
+                              style: TextStyle(color: Colors.grey)),
+
+                          Text("    |     ",
+                              style: TextStyle(color: Colors.grey)),
+                          Text("size: ${size ?? ""}",
+                              style: TextStyle(color: Colors.grey)),
+                          Text("    |     ",
+                              style: TextStyle(color: Colors.grey)),
+                          Text("model: ${model ?? ""}",
+                              style: TextStyle(color: Colors.grey)),
+                          // Text(
+                          //   "$maintenance",
+                          //   style: TextStyle(
+                          //     color: Colors.grey,
+                          //   ),
+                          // ),
                         ],
                       ),
                       SizedBox(height: 5),
@@ -420,7 +430,8 @@ class BicycleItem extends StatelessWidget {
                   ),
                 ),
                 SizedBox(width: 10),
-                Image.network(photoPath ?? "", height: 80, width: 80),
+                // Image.network(photoPath ?? "", height: 80, width: 80),
+                Image.network("https://" + photoPath!, height: 80, width: 80),
               ],
             ),
             SizedBox(height: 10),
@@ -431,7 +442,7 @@ class BicycleItem extends StatelessWidget {
                 backgroundColor: Colors.lightGreen[100],
                 minimumSize: Size(double.infinity, 36),
               ),
-              child: Text('View car list'),
+              child: Text('hub content'),
             ),
           ],
         ),

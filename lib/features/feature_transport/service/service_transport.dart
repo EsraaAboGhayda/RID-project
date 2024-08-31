@@ -18,21 +18,23 @@ import '../model/hub_content.dart';
 class TranspoetSeviceImp extends CoreService {
   // ===============================22222222222222222222222222222222222
 
-  Future<ResultModel> GetBicycleByCategory(String namecategory) async {
+  Future<ResultModel> GetBicycleByCategory(namecategory) async {
     try {
+      print(
+          "lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
       final response = await dio.get(
         '$baseurl/bicycle/bicycles-by-category?category=$namecategory',
         options: HeaderConfig.getHeader(useToken: true),
       );
-
+      print(response.statusCode);
+      print(response.data);
       if (response.statusCode == 200) {
-        List<BicycleByCategoryModel> bicyclesByCategories =
-            (response.data['body'] as List)
-                .map((item) => BicycleByCategoryModel.fromMap(item))
-                .toList();
-
-        return ListOf<BicycleByCategoryModel>(
-            resutlAsList: bicyclesByCategories);
+        print(response.statusCode);
+        print(response.data);
+        BicycleByCategoryModel bicyclesByCategories =
+            BicycleByCategoryModel.fromJson(response.data);
+        print(bicyclesByCategories.body);
+        return DataSuccess<BicycleByCategoryModel>(data: bicyclesByCategories);
       } else {
         return ErrorModel(
             message: 'Failed to fetch data: Status ${response.statusCode}');
@@ -96,7 +98,11 @@ class TranspoetSeviceImp extends CoreService {
     try {
       response = await dio.get(baseurl + "/bicycle/bicycles-categories",
           options: HeaderConfig.getHeader(useToken: true));
+      print(response.statusCode);
+      print(response.data);
       if (response.statusCode == 200) {
+        print(response.statusCode);
+        print(response.data);
         List<String> BicyclesCategories = List.generate(
             response.data['body'].length,
             (index) => response.data['body'][index]
@@ -115,19 +121,25 @@ class TranspoetSeviceImp extends CoreService {
   }
 
   // @override
-  Future<ResultModel> GetHubContent(
-      BicycleCategoryModel namecategory, HubModel hubid) async {
+  Future<ResultModel> GetHubContent(namecategory, hubid) async {
     try {
       response = await dio.get(
-          baseurl +
-              "/hub-content/${hubid.id}?bicycleCategory=${namecategory.body}",
+          baseurl + "/hub-content/${hubid}?bicycleCategory=${namecategory}",
           options: HeaderConfig.getHeader(useToken: true));
+      print(response.statusCode);
+      print(response.data);
       if (response.statusCode == 200) {
-        List<HubContentModel> HubContent = List.generate(
-          response.data.length,
-          (index) => HubContentModel.fromJson(response.data[index]),
-        );
-        return ListOf<HubContentModel>(resutlAsList: HubContent);
+        print(response.statusCode);
+        print(response.data);
+        HubContentModel HubContent =
+            HubContentModel.fromJson(response.data['body']);
+        print("dsfghjgfdsghjkhgfvb${HubContent.body}");
+        return DataSuccess<HubContentModel>(data: HubContent);
+        // List<HubContentModel> HubContent = List.generate(
+        //   response.data.length,
+        //   (index) => HubContentModel.fromJson(response.data['body']),
+        // );
+        // return ListOf<HubContentModel>(resutlAsList: HubContent);
       } else {
         return ErrorModel(message: '');
       }

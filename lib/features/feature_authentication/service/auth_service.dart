@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:ride_project/core/config/get_it_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/config/header_config.dart';
 import '../../../../core/config/handling_model.dart';
+import '../../../core/config/get_it_config.dart';
 import '../model/login_model.dart';
 import '../model/signup_model.dart';
 import '../../../../core/config/core_service.dart';
@@ -31,7 +31,7 @@ class AuthSeviceImp extends AuthService {
 // print(storedToken?.token);
         String token = response.data['body']['token'];
         core.get<SharedPreferences>().setString('token', token);
-        return DataSuccess();
+        return DataSuccess(data: true);
       } else {
         print("else");
         return ErrorModel(message: "");
@@ -48,7 +48,7 @@ class AuthSeviceImp extends AuthService {
       response = await dio.post(baseurl + "/auth/authenticate",
           data: user.toMap(), options: HeaderConfig.getHeader());
       if (response.statusCode == 200) {
-        return DataSuccess();
+        return DataSuccess(data: true);
       } else {
         return ErrorModel(message: "");
       }

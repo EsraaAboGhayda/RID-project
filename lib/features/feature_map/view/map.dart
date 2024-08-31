@@ -218,6 +218,180 @@
 // }
 
 // =================================
+// import 'package:flutter/material.dart';
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:flutter_map/flutter_map.dart';
+// import 'package:geolocator/geolocator.dart';
+// import 'package:latlong2/latlong.dart';
+
+// import '../../../../core/config/handling_model.dart';
+// import '../../../core/resources/colors.dart';
+// import '../../feature_transport/view/SelectTransport.dart';
+// import '../model/HubModel.dart';
+// import '../model/UserLocationModel.dart';
+// import '../provider/map_provider.dart';
+
+// final userLocationProvider = StateProvider<Position?>((ref) => null);
+
+// class MapScreen extends ConsumerWidget {
+//   MapScreen({
+//     super.key,
+//   });
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     final userLocation = ref.watch(userLocationProvider);
+
+//     final hubsAsyncValue = userLocation != null
+//         ? ref.watch(map_provider_getLocation(UserLocationModel(
+//             latitude: userLocation.latitude,
+//             longitude: userLocation.longitude)))
+//         : AsyncValue.loading();
+
+//     // ref.watch(map_provider_getHubs(
+//     //     HubCategoryParams(userLocationtohub as UserLocationModel, contexttohub as BuildContext)));
+
+//     return Scaffold(
+//       // appBar: AppBar(
+//       //   title: Text('Map Screen'),
+//       // ),
+//       body: ref
+//           .watch(map_provider_getHubs(userLocation as UserLocationModel))
+//           .when(data: (data) {
+//         return Stack(
+//           children: [
+//             FlutterMap(
+//               options: MapOptions(
+//                 initialCenter: userLocation != null
+//                     ? LatLng(userLocation.latitude, userLocation.longitude)
+//                     : LatLng(33.510414, 36.278336),
+//                 initialZoom: 13.0,
+//               ),
+//               children: [
+//                 TileLayer(
+//                   urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+//                   userAgentPackageName: 'com.example.app',
+//                 ),
+
+//                 //  return
+//                 // MarkerLayer(
+//                 //markers:List.generate(stateTwo.data.length, (index) {
+//                 //                        return Marker(
+//                 //                          point:  LatLng(stateTwo.data[index].latitude, stateTwo.data[index].longitude),
+//                 //                          child: IconButton(
+//                 //                            icon:const Icon(Icons.location_on,color: darkRedColor,size: 40,),
+//                 //                            onPressed: (){
+//                 //                              Navigator.pushNamed(context,'/SelectTransport',arguments: SelectTransport(
+//                 //                                  hubId:stateTwo.data[index].id
+//                 //                              ),);
+//                 //                              print(stateTwo.data[index].id);
+//                 //                              FlutterMapMath flutterMapMath=FlutterMapMath();
+//                 //                              distance = flutterMapMath.distanceBetween(
+//                 //                                  state.data.latitude!,
+//                 //                                  state.data.longitude!,
+//                 //                                  stateTwo.data[index].latitude,
+//                 //                                  stateTwo.data[index].longitude,
+//                 //                                  "meters"
+//                 //                              );
+//                 //                            },
+//                 //                          ),
+//                 //                          width: 80,
+//                 //                          height: 80
+//                 //                        );
+//                 //                     },)
+//                 //                     );
+//                 MarkerLayer(
+//                     markers: List.generate(
+//                   // (data as ListOf<HubModel>).resutlAsList.length,
+//                   (data as DataSuccess).data.resutlAsList.length,
+//                   (index) {
+//                     return Marker(
+//                         point: LatLng(data.data.resutlAsList[index].latitude,
+//                             data.data.resutlAsList[index].longitude),
+//                         child: IconButton(
+//                           icon: const Icon(
+//                             Icons.location_on,
+//                             color: Colors.red,
+//                             size: 40,
+//                           ),
+//                           onPressed: () {
+//                             Navigator.pushNamed(
+//                               context,
+//                               '/SelectTransport',
+//                               arguments: SelectTransport(
+//                                   hubId: data.data.resutlAsList[index].id),
+//                             );
+//                           },
+//                         ),
+//                         width: 80,
+//                         height: 80);
+//                   },
+//                 ))
+//                 // MarkerLayer(
+//                 // markers: [
+//                 //                marker.add(Marker(
+//                 //         point: LatLng(hubs[i].latitude, hubs[i].longitude),
+//                 //         child: IconButton(
+//                 //           icon: Icon(
+//                 //             Icons.location_on,
+//                 //             color: Colors.red,
+//                 //             size: 40,
+//                 //           ),
+//                 //           onPressed: () {
+//                 //             Navigator.pushNamed(
+//                 //               context,
+//                 //               '/SelectTransport',
+//                 //               arguments: SelectTransport(hubId: hubs[i].id),
+//                 //             );
+//                 //           },
+//                 //         ),
+//                 //         width: 80,
+//                 //         height: 80));
+//                 //   }
+//                 // }
+//                 // markers:List.generate(stateTwo.data.length, (index) {
+//                 // if (userLocation != null){
+
+//                 //   Marker(
+//                 //     point:
+//                 //         LatLng(userLocation.latitude, userLocation.longitude),
+//                 //     child: Icon(Icons.location_pin,
+//                 //         color: Colors.blue, size: 50),
+//                 //   ),}
+//                 // if (hubsAsyncValue is AsyncData &&
+//                 //     hubsAsyncValue.value is ListOf)
+//                 //   ...hubsAsyncValue.value.resutlAsList.map((hub) => Marker(
+//                 //         point: LatLng(hub.latitude, hub.longitude),
+//                 //         child: Icon(Icons.location_pin,
+//                 //             color: Colors.red, size: 50),
+//                 //       )),
+//                 // ],
+//               ],
+//             ),
+//             Positioned(
+//               bottom: 20,
+//               right: 20,
+//               child: FloatingActionButton(
+//                 backgroundColor: ColorsManager.bg_buttonColor_backgroundColor,
+//                 onPressed: () async {
+//                   Position position = await Geolocator.getCurrentPosition(
+//                       desiredAccuracy: LocationAccuracy.high);
+//                   ref.read(userLocationProvider.notifier).state = position;
+//                 },
+//                 child: Icon(Icons.my_location),
+//               ),
+//             ),
+//           ],
+//         );
+//       }, error: (Object error, StackTrace stackTrace) {
+//         return Text("An error occurred: ${error.toString()}",
+//             style: TextStyle(color: Colors.red));
+//       }, loading: () {
+//         return Center(child: CircularProgressIndicator());
+//       }),
+//     );
+//   }
+// }
+// ==============================================
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -226,79 +400,254 @@ import 'package:latlong2/latlong.dart';
 
 import '../../../../core/config/handling_model.dart';
 import '../../../core/resources/colors.dart';
+import '../../feature_transport/view/SelectTransport.dart';
 import '../model/UserLocationModel.dart';
 import '../provider/map_provider.dart';
 
-final userLocationProvider = StateProvider<Position?>((ref) => null);
+// final userLocationProvider = StateProvider<UserLocationModel?>((ref) => null);
 
-class MapScreen extends ConsumerWidget {
-  MapScreen({
-    super.key,
-    required this.type,
-  });
-  String type;
+// class MapScreen extends ConsumerWidget {
+//   MapScreen({super.key});
+
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     late Position currentPosition;
+
+//     final userLocation = ref.watch(userLocationProvider);
+//     final hubsAsyncValue = userLocation != null
+//         ? ref.watch(map_provider_getHubs(userLocation))
+//         : const AsyncValue.loading();
+
+//     return Scaffold(
+//       body: hubsAsyncValue.when(
+//         data: (data) {
+//           return Stack(
+//             children: [
+//               FlutterMap(
+//                 options: MapOptions(
+//                   initialCenter: userLocation != null
+//                       ? LatLng(userLocation.latitude, userLocation.longitude)
+//                       : LatLng(33.510414, 36.278336),
+//                   initialZoom: 13.0,
+//                 ),
+//                 children: [
+//                   TileLayer(
+//                     urlTemplate:
+//                         'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+//                     userAgentPackageName: 'com.example.app',
+//                   ),
+//                   MarkerLayer(
+//                     markers: List.generate(
+//                       (data as DataSuccess).data.resutlAsList.length,
+//                       (index) {
+//                         return Marker(
+//                           point: LatLng(
+//                             data.data.resutlAsList[index].latitude,
+//                             data.data.resutlAsList[index].longitude,
+//                           ),
+//                           child: IconButton(
+//                             icon: const Icon(
+//                               Icons.location_on,
+//                               color: Colors.red,
+//                               size: 40,
+//                             ),
+//                             onPressed: () {
+//                               Navigator.pushNamed(
+//                                 context,
+//                                 '/SelectTransport',
+//                                 arguments: SelectTransport(
+//                                   hubId: data.data.resutlAsList[index].id,
+//                                 ),
+//                               );
+//                             },
+//                           ),
+//                           width: 80,
+//                           height: 80,
+//                         );
+//                       },
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//               Positioned(
+//                 bottom: 20,
+//                 right: 20,
+//                 child: FloatingActionButton(
+//                   backgroundColor: ColorsManager.bg_buttonColor_backgroundColor,
+//                   onPressed: () async {
+//                     Position position = await Geolocator.getCurrentPosition(
+//                         desiredAccuracy: LocationAccuracy.high);
+//                     setState(() {
+//                       currentPosition = position;
+//                     });
+//                     // Position position = await Geolocator.getCurrentPosition(
+//                     //     desiredAccuracy: LocationAccuracy.high);
+//                     ref.read(userLocationProvider.notifier).state =
+//                         UserLocationModel(
+//                       latitude: position.latitude,
+//                       longitude: position.longitude,
+//                     );
+//                   },
+//                   child: Icon(Icons.my_location),
+//                 ),
+//               ),
+//             ],
+//           );
+//         },
+//         error: (Object error, StackTrace stackTrace) {
+//           return Text(
+//             "An error occurred: ${error.toString()}",
+//             style: TextStyle(color: Colors.red),
+//           );
+//         },
+//         loading: () {
+//           return Center(child: CircularProgressIndicator());
+//         },
+//       ),
+//     );
+//   }
+// }
+
+final userLocationProvider = StateProvider<UserLocationModel?>((ref) => null);
+
+class MapScreen extends ConsumerStatefulWidget {
+  const MapScreen({super.key});
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final userLocation = ref.watch(userLocationProvider);
+  ConsumerState<MapScreen> createState() => _MapScreenState();
+}
 
-    final hubsAsyncValue = userLocation != null
-        ? ref.watch(map_provider_getHubs(UserLocationModel(
-            latitude: userLocation.latitude,
-            longitude: userLocation.longitude)))
-        : AsyncValue.loading();
+class _MapScreenState extends ConsumerState<MapScreen> {
+  late Position currentPosition;
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentLocation();
+  }
+
+  Future<void> _getCurrentLocation() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.bestForNavigation);
+    ref.read(userLocationProvider.notifier).state = UserLocationModel(
+      latitude: position.latitude,
+      longitude: position.longitude,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final userLocation = ref.watch(userLocationProvider);
+    if (userLocation == null) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
 
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Map Screen'),
-      // ),
-      body: Stack(
-        children: [
-          FlutterMap(
-            options: MapOptions(
-              initialCenter: userLocation != null
-                  ? LatLng(userLocation.latitude, userLocation.longitude)
-                  : LatLng(33.510414, 36.278336),
-              initialZoom: 13.0,
-            ),
+      body: ref.watch(map_provider_getHubs(userLocation)).when(
+        data: (data) {
+          return Stack(
             children: [
-              TileLayer(
-                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                userAgentPackageName: 'com.example.app',
-              ),
-              MarkerLayer(
-                markers: [
-                  if (userLocation != null)
-                    Marker(
-                      point:
-                          LatLng(userLocation.latitude, userLocation.longitude),
-                      child: Icon(Icons.location_pin,
-                          color: Colors.blue, size: 50),
+              FlutterMap(
+                options: MapOptions(
+                  initialCenter:
+                      LatLng(userLocation.latitude, userLocation.longitude),
+                  initialZoom: 13.0,
+                ),
+                children: [
+                  TileLayer(
+                    urlTemplate:
+                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    userAgentPackageName: 'com.example.app',
+                  ),
+                  MarkerLayer(
+                    markers: List.generate(
+                      (data as ListOf).resutlAsList.length,
+                      (index) {
+                        return Marker(
+                          point: LatLng(
+                            data.resutlAsList[index].latitude,
+                            data.resutlAsList[index].longitude,
+                          ),
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.location_on,
+                              color: Colors.red,
+                              size: 40,
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                '/SelectTransport',
+                                arguments: SelectTransport(
+                                  hubId: data.resutlAsList[index].id,
+                                ),
+                              );
+                            },
+                          ),
+                          width: 80,
+                          height: 80,
+                        );
+                      },
                     ),
-                  if (hubsAsyncValue is AsyncData &&
-                      hubsAsyncValue.value is ListOf)
-                    ...hubsAsyncValue.value.resutlAsList.map((hub) => Marker(
-                          point: LatLng(hub.latitude, hub.longitude),
-                          child: Icon(Icons.location_pin,
-                              color: Colors.red, size: 50),
-                        )),
+                  ),
+                  MarkerLayer(
+                    markers: [
+                      Marker(
+                        point: LatLng(
+                            userLocation.latitude, userLocation.longitude),
+                        child: const Icon(
+                          Icons.location_on,
+                          color: Colors.blue,
+                          size: 40,
+                        ),
+                      )
+                    ],
+                  )
                 ],
               ),
+              Positioned(
+                bottom: 20,
+                right: 20,
+                child: FloatingActionButton(
+                  backgroundColor: ColorsManager.bg_buttonColor_backgroundColor,
+                  onPressed: () async {
+                    try {
+                      // Position position = await Geolocator.getCurrentPosition(
+                      //     desiredAccuracy: LocationAccuracy.high);
+                      // ref.read(userLocationProvider.notifier).state =
+                      //     UserLocationModel(
+                      //   latitude: position.latitude,
+                      //   longitude: position.longitude,
+                      // );
+                      Position position = await Geolocator.getCurrentPosition(
+                          desiredAccuracy: LocationAccuracy.bestForNavigation);
+                      ref.read(userLocationProvider.notifier).state =
+                          UserLocationModel(
+                        latitude: position.latitude,
+                        longitude: position.longitude,
+                      );
+                    } catch (e) {
+                      print("Error getting location: $e");
+                    }
+                  },
+                  child: Icon(Icons.my_location),
+                ),
+              ),
             ],
-          ),
-          Positioned(
-            bottom: 20,
-            right: 20,
-            child: FloatingActionButton(
-              backgroundColor: ColorsManager.bg_buttonColor_backgroundColor,
-              onPressed: () async {
-                Position position = await Geolocator.getCurrentPosition(
-                    desiredAccuracy: LocationAccuracy.high);
-                ref.read(userLocationProvider.notifier).state = position;
-              },
-              child: Icon(Icons.my_location),
+          );
+        },
+        error: (Object error, StackTrace stackTrace) {
+          return Center(
+            child: Text(
+              "An error occurred: ${error.toString()}",
+              style: TextStyle(color: Colors.red),
             ),
-          ),
-        ],
+          );
+        },
+        loading: () {
+          return Center(child: CircularProgressIndicator());
+        },
       ),
     );
   }

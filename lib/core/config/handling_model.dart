@@ -1,6 +1,4 @@
-class ResultModel {
-  get resutlAsList => null;
-}
+class ResultModel {}
 
 class ErrorModel extends ResultModel {
   String message;
@@ -16,7 +14,10 @@ class ExceptionModel extends ResultModel {
   });
 }
 
-class DataSuccess extends ResultModel {}
+class DataSuccess<T> extends ResultModel {
+  T data;
+  DataSuccess({required this.data});
+}
 
 class ListOf<T> extends ResultModel {
   List<T> resutlAsList;

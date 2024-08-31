@@ -8,8 +8,8 @@ class HeaderConfig {
       return Options(headers: {
         "accept": "*/*",
         "Authorization":
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNTkyNjM3ODQ3IiwiaWF0IjoxNzI0NjQ5MTIxLCJleHAiOjE3MjQ3MzU1MjF9.8umPPAjCVMi7gE6yQg7VnNu81sfnH1C2j6zja3fQytk"
-        // "Bearer${(core.get<SharedPreferences>().getString('token'))}"
+            // "Bearer${(core.get<SharedPreferences>().getString('token'))}"
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4NTI3NDk2MzQ3IiwiaWF0IjoxNzI1MDc5MzU1LCJleHAiOjE3MjUxNjU3NTV9.glAsMrIqNmAHKfz51o1S7EL6eTJ8bYFjEtqzTgSuZzs"
       });
     } else {
       return Options(
