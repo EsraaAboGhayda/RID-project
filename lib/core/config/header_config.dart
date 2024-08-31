@@ -8,8 +8,8 @@ class HeaderConfig {
       return Options(headers: {
         "accept": "*/*",
         "Authorization":
-            // "Bearer${(core.get<SharedPreferences>().getString('token'))}"
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4NTI3NDk2MzQ3IiwiaWF0IjoxNzI1MDc5MzU1LCJleHAiOjE3MjUxNjU3NTV9.glAsMrIqNmAHKfz51o1S7EL6eTJ8bYFjEtqzTgSuZzs"
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3ODk2NTM0ODc5IiwiaWF0IjoxNzI1MDkzOTMxLCJleHAiOjE3MjUxODAzMzF9.9QuMHSMJef2ISS6OaQiT11jGpciRUbEetcg4LMz9SYU"
+        // "Bearer${(core.get<SharedPreferences>().getString('token'))}"
       });
     } else {
       return Options(

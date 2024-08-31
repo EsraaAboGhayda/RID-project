@@ -30,7 +30,7 @@ class AuthSeviceImp extends AuthService {
 // var storedToken = box.get('tokenKey');
 // print(storedToken?.token);
         String token = response.data['body']['token'];
-        core.get<SharedPreferences>().setString('token', token);
+        // core.get<SharedPreferences>().setString('token', token);
         return DataSuccess(data: true);
       } else {
         print("else");
