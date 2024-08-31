@@ -17,24 +17,41 @@
 
 // ================================
 
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geolocator/geolocator.dart';
 import '../model/UserLocationModel.dart';
 import '../../../core/config/handling_model.dart';
 import '../service/getHubs.dart';
+
+// class HubCategoryParams {
+//   final UserLocationModel userLocationtohub;
+//   final BuildContext contexttohub;
+
+//   HubCategoryParams(this.userLocationtohub, this.contexttohub);
+// }
 
 final map_provider_service = Provider<MapService>((ref) {
   return MapService();
 });
 
 final map_provider_getHubs =
-    FutureProvider.family<ResultModel, UserLocationModel>((ref, userLocation) {
-  return ref.read(map_provider_service).getAllHubs(userLocation);
+    FutureProvider.family<ResultModel, UserLocationModel>(
+        (ref, userLocationtohub) {
+  return ref.read(map_provider_service).getAllHubs(userLocationtohub);
 });
 
-final map_provider_getLocation =
-    FutureProvider.family<ResultModel, UserLocationModel>((ref, userLocation) {
-  return ref.read(map_provider_service).setUserLocationOnMap(userLocation);
-});
+// final map_provider_getHubs =
+//     FutureProvider.family<ResultModel, HubCategoryParams>((ref, params) {
+//   return ref
+//       .read(map_provider_service)
+//       .getAllHubs(params.userLocationtohub, params.contexttohub);
+// });
+
+// final map_provider_getLocation =
+//     FutureProvider.family<ResultModel, UserLocationModel>((ref, userLocation) {
+//   return ref.read(map_provider_service).setUserLocationOnMap(userLocation);
+// });
 
 // =================================
 

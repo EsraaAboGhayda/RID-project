@@ -15,25 +15,25 @@ import '../model/HubModel.dart';
 import '../model/UserLocationModel.dart';
 
 class MapService extends CoreService {
-  MapController mapController = MapController();
-  var marker = <Marker>[];
-  Future<ResultModel> setUserLocationOnMap(
-      UserLocationModel userLocation) async {
-    //  mapController.move(
-    //     LatLng(userLocation.latitude, userLocation.longitude), 15.0);
-    marker.add(Marker(
-        point: LatLng(userLocation.latitude, userLocation.longitude),
-        child: const Icon(
-          Icons.location_on,
-          color: Colors.blue,
-        )));
-    List<UserLocationModel> locationUser = List.generate(marker.length,
-        (index) => UserLocationModel.fromJson(marker[index] as String));
-    return ListOf(resutlAsList: locationUser);
-  }
+  // MapController mapController = MapController();
+  // var marker = <Marker>[];
+  // Future<ResultModel> setUserLocationOnMap(
+  //     UserLocationModel userLocation) async {
+  //   //  mapController.move(
+  //   //     LatLng(userLocation.latitude, userLocation.longitude), 15.0);
+  //   marker.add(Marker(
+  //       point: LatLng(userLocation.latitude, userLocation.longitude),
+  //       child: const Icon(
+  //         Icons.location_on,
+  //         color: Colors.blue,
+  //       )));
+  //   List<UserLocationModel> locationUser = List.generate(marker.length,
+  //       (index) => UserLocationModel.fromJson(marker[index] as String));
+  //   return ListOf(resutlAsList: locationUser);
+  // }
 
-  Future<ResultModel> getAllHubs(resutlAsList) async {
-    var marker = <Marker>[];
+  Future<ResultModel> getAllHubs(locationUser) async {
+    // var marker = <Marker>[];
     // late Position currentPosition;
 
     // Position position = await Geolocator.getCurrentPosition(
@@ -42,42 +42,50 @@ class MapService extends CoreService {
     // currentPosition = position;
     try {
       response = await dio.get(
-          "https://rideshare.devscape.online/api/v1/hubs?longtitude=${resutlAsList.longitude}&latitude=${resutlAsList.latitude}",
+          "https://rideshare.devscape.online/api/v1/hubs?longtitude=${locationUser.longitude}&latitude=${locationUser.latitude}",
           options: HeaderConfig.getHeader(useToken: true));
+      print('fghjkj00000000jjjjjjjjjjjjjjjjjl');
+      print(response.statusCode);
+      print(response.data);
       if (response.statusCode == 200) {
+        print(response.statusCode);
+        print(response.data);
+        // HubModel hubs = HubModel.fromJson(response.data['body']);
         List<HubModel> hubs = List.generate(
           response.data['body'].length,
           (index) => HubModel.fromJson(response.data['body'][index]),
         );
-        if (hubs.isNotEmpty) {
-          for (int i = 0; i < hubs.length; i++) {
-            marker.add(Marker(
-                point: LatLng(hubs[i].latitude, hubs[i].longitude),
-                child: IconButton(
-                  icon: Icon(
-                    Icons.location_on,
-                    color: Colors.red,
-                    size: 40,
-                  ),
-                  onPressed: () {
-                    // Navigator.pushNamed(
-                    //   context,
-                    //   '/SelectTransport',
-                    //   arguments: SelectTransport(hubId: hubs[i].id),
-                    // );
-                  },
-                ),
-                width: 80,
-                height: 80));
-          }
-        }
+        print(hubs);
+        // return DataSuccess<HubModel>(data: hubs);
+        // if (hubs.isNotEmpty) {
+        //   for (int i = 0; i < hubs.length; i++) {
+        //     marker.add(Marker(
+        //         point: LatLng(hubs[i].latitude, hubs[i].longitude),
+        //         child: IconButton(
+        //           icon: Icon(
+        //             Icons.location_on,
+        //             color: Colors.red,
+        //             size: 40,
+        //           ),
+        //           onPressed: () {
+        //             Navigator.pushNamed(
+        //               context,
+        //               '/SelectTransport',
+        //               arguments: SelectTransport(hubId: hubs[i].id),
+        //             );
+        //           },
+        //         ),
+        //         width: 80,
+        //         height: 80));
+        //   }
+        // }
         return ListOf(resutlAsList: hubs);
       } else {
         return ErrorModel(message: '');
       }
     } on DioException catch (e) {
-      print(e.message);
-      return ExceptionModel(message: e.message!);
+      print(e.response!.data.toString());
+      return ExceptionModel(message: e.response!.data.toString());
     }
   }
 }

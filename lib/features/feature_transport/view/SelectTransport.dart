@@ -67,14 +67,18 @@
 // }
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ride_project/features/feature_transport/view/HubContent.dart';
 
 import '../../../core/config/handling_model.dart';
 import '../provider/transport_provider.dart';
 import 'SelectAvaialbleTransport.dart';
 
 class SelectTransport extends ConsumerWidget {
-  SelectTransport({super.key});
-
+  SelectTransport({
+    super.key,
+    required this.hubId,
+  });
+  int hubId;
   @override
   Widget build(BuildContext context, ref) {
     final watch = ref.watch(Transport_provider_GetBicycleCategory);
@@ -115,8 +119,9 @@ class SelectTransport extends ConsumerWidget {
                                 context, '/SelectAvaialbleTransport',
                                 arguments: SelectAvaialbleTransport(
                                   namecategory: categories[index],
+                                  hubId: hubId,
                                 ));
-                            // print("${categories[index]}");
+                            print("${categories[index]}");
                           },
                           child: Container(
                             width: 50,

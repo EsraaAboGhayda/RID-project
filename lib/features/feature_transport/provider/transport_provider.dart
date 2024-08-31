@@ -6,8 +6,8 @@ import '../model/bicycle_category.dart';
 import '../service/service_transport.dart';
 
 class HubCategoryParams {
-  final BicycleCategoryModel category;
-  final HubModel hub;
+  final String category;
+  final int hub;
 
   HubCategoryParams(this.category, this.hub);
 }
